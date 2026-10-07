@@ -1,0 +1,56 @@
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: research-agent
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:research_agent;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: ${DATABASE_DRIVER:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+# Research Agent Application Configuration
+app:
+  ai:
+    provider: ${AI_PROVIDER:gemini} # auto, gemini, openai
+    api-key: ${AI_API_KEY:AQ.Ab8RN6K131vaJ7cKUFw3btROOECnXE45vYYM2k8GUEejZ3aeOA}
+    gemini:
+      model: ${GEMINI_MODEL:gemini-flash-lite-latest}
+      endpoint: ${GEMINI_ENDPOINT:https://generativelanguage.googleapis.com/v1beta/models}
+    openai:
+      model: ${OPENAI_MODEL:gpt-4o-mini}
+      endpoint: ${OPENAI_ENDPOINT:https://api.openai.com/v1/chat/completions}
+  search:
+    provider: ${SEARCH_PROVIDER:auto} # auto, tavily, serper, duckduckgo
+    api-key: ${SEARCH_API_KEY:}
+    max-results: ${SEARCH_MAX_RESULTS:6}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000}
+
+# SpringDoc OpenAPI Swagger UI configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+logging:
+  level:
+    root: INFO
+    com.sheruba.research_agent: DEBUG
+    org.springframework.web: INFO

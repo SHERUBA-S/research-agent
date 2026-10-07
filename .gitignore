@@ -1,0 +1,27 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node.js & Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+.npm
+*.log
+
+# Java & Maven
+backend/target/
+*.class
+*.jar
+*.war
+.mvn/wrapper/maven-wrapper.jar
+tools/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
